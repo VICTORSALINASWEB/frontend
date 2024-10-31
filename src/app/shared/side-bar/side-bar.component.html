@@ -1,0 +1,59 @@
+<aside class="main-sidebar sidebar-light-warning elevation-4">
+    <!-- Brand Logo -->
+    <a [routerLink]="['/']" class="brand-link navbar-warning">
+        <span class="brand-text font-weight-light">Panel Admin</span>
+    </a>
+
+
+    <!-- Sidebar -->
+    <div class="sidebar"> 
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a [routerLink]="['/']" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Home
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/clientes']" routerLinkActive="active" class="nav-link" >
+                        <i class="nav-icon fas fa-people-carry"></i>
+                        <p>
+                            Clientes
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/usuarios']" routerLinkActive="active" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Usuario
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/campanas']" routerLinkActive="active" class="nav-link">
+                        <i class="nav-icon fas fa-shopping-basket"></i>
+                        <p>
+                            Campañas
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/mensajes']" routerLinkActive="active" class="nav-link">
+                        <i class="nav-icon fas fa-comment"></i>
+                        <p>
+                            Mensajes
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
