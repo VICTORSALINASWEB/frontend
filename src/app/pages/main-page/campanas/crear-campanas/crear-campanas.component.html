@@ -5,5 +5,91 @@
             <h2 class="card-title mb-0">Crear campaña</h2>
             <button type="button" class="close" mat-dialog-close>&times;</button>
         </div>
+        <form autocomplete="off" [formGroup]="formulario" (submit)="guardar()">
+            <div class="card-body">
+                <!-- Precarga -->
+                <ng-container *ngIf="!loadData">
+
+                    <div class="form-group">
+                        <label for="inputNombre">Nombre :</label>
+
+                        <div class="input-group">
+                            <input type="text" formControlName="name" id="inputNombre" class="form-control"  [ngClass]="{'is-invalid':error.name.length > 0}">
+                            <small  class="invalid-feedback" *ngIf="error.name.length > 0">
+                                {{error.name}}
+                            </small>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label for="InputFechaProceso">Fecha de proceso</label>
+                        <input type="date" formControlName="process_date" id="InputFechaProceso" class="form-control"  [ngClass]="{'is-invalid':error.process_date.length > 0}">
+                        <small  class="invalid-feedback" *ngIf="error.process_date.length > 0">
+                            {{error.process_date}}
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="InputHoraProceso">Hora de proceso</label>
+                        <input type="time" formControlName="process_hour" id="InputHoraProceso" class="form-control"  [ngClass]="{'is-invalid':error.process_hour.length > 0}">
+                        <small  class="invalid-feedback" *ngIf="error.process_hour.length > 0">
+                            {{error.process_hour}}
+                        </small>
+                    </div>  
+                    <div class="form-group">
+                        <label for="InputListaCelular">Lista de Celulares</label>
+                        <mat-form-field class="example-form-field">
+                        <mat-chip-grid #chipGrid aria-label="Presione Enter" formControlName="phone_list" >
+                            <mat-chip-row *ngFor="let keyword of phone_list" (removed)="removeKeyword(keyword)">
+                            {{keyword}}
+                            <button matChipRemove aria-label="'remove ' + keyword">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                            </mat-chip-row>
+                        </mat-chip-grid>
+                        <input placeholder="Nuevo celular..."
+                                [matChipInputFor]="chipGrid"
+                                (matChipInputTokenEnd)="add($event)" [ngClass]="{'is-invalid':error.phone_list.length > 0}"/>
+                        <small  class="invalid-feedback" *ngIf="error.phone_list.length > 0"  >
+                            {{error.phone_list}}
+                        </small>
+                        </mat-form-field>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label for="InputUsuario">Usuario</label>
+                        <select  class="form-control" formControlName="user_id"  id="InputUsuario"  [ngClass]="{'is-invalid':error.user_id.length > 0}">
+                        <option value="0">Seleccione Usuario</option>
+                        <ng-container *ngFor="let itemUsuario of dataUsuarios">
+                            <option  [value]="itemUsuario.id">{{itemUsuario.username | uppercase}}</option>
+                        </ng-container>
+                        </select>
+                        <small  class="invalid-feedback" *ngIf="error.user_id.length > 0" >
+                            {{error.user_id}}
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="InputMensaje">Mensaje de texto</label>
+                        <textarea class="form-control" formControlName="message_text"  rows="3"  [ngClass]="{'is-invalid':error.message_text.length > 0}"></textarea>
+                        <small  class="invalid-feedback" *ngIf="error.message_text.length > 0" >
+                            {{error.message_text}}
+                        </small>
+                    </div>
+                </ng-container>
+                <div *ngIf="loadData" class="overlay">
+                    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <button mat-dialog-close class="btn btn-secondary ">
+                    Cerrar
+                </button>
+                <button type="submit" class="btn btn-warning float-right">
+                    Guardar
+                </button>
+            </div>
+        </form>
     </div>
+
 </mat-dialog-content>

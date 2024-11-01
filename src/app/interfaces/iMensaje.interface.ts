@@ -4,6 +4,6 @@ export interface iMensaje{
     text?: string;
     shipping_status?: number;
     process_date?: Date;
-    process_hour?: string;
+    process_hour?: Date;
     campaign_id?: number;
 }

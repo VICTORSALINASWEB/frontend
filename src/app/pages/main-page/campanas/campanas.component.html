@@ -91,8 +91,14 @@
             <ng-container matColumnDef="accion">
               <th mat-header-cell *matHeaderCellDef> Acción</th>
               <td mat-cell *matCellDef="let element"> 
-                <button  class="btn btn-primary" *ngIf="element.process_status === 1">
-                  Aprobar
+                <button  class="btn btn-primary mr-1" *ngIf="element.process_status === 1" (click)="clickEditar(element.id)">
+                  Editar
+                </button>
+                <button  class="btn btn-success" *ngIf="element.process_status === 1" (click)="clickEnviar(element.id)">
+                  Enviar
+                </button>
+                <button  class="btn btn-success" *ngIf="element.process_status !== 1" (click)="clickVerMensaje(element.id)">
+                  Ver mensajes
                 </button>
               </td>
             </ng-container>

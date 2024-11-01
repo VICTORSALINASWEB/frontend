@@ -12,7 +12,6 @@ const routes: Routes = [
 			{ path: 'usuarios',title:'Prueba | Usuarios', loadChildren: () => import('./main-page/usuarios/usuarios.module').then(m => m.UsuariosModule) },
 			{ path: 'clientes',title:'Prueba | Clientes', loadChildren: () => import('./main-page/clientes/clientes.module').then(m => m.ClientesModule) },
 			{ path: 'campanas',title:'Prueba | Campanas', loadChildren: () => import('./main-page/campanas/campanas.module').then(m => m.CampanasModule) },
-			{ path: 'mensajes',title:'Prueba | Mensajes', loadChildren: () => import('./main-page/mensajes/mensajes.module').then(m => m.MensajesModule) },
 			{ path: '**', component: Error404Component }
 		]
 	}
