@@ -7,4 +7,21 @@ export class alerts{
     static basicAlert(title: string,text:string,icon:SweetAlertIcon){
         Swal.fire(title,text,icon);
     }
+
+  // Muestra el loader
+  static showLoader() {
+    Swal.fire({
+        title: "Cargando...",
+        html: "Espere por favor...",
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+}
+
+// Cierra el loader
+static closeLoader() {
+    Swal.close();
+}
 }
