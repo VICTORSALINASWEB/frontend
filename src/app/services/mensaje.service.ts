@@ -18,10 +18,6 @@ export class MensajeService {
     return this.http.get<iResponse>(this.url+'message/'+id);
   }
 
-  getData(){
-    return this.http.get<iResponse>(this.url+'message');
-  }
-
   create(data: iMensaje){
     return this.http.post<iResponse>(this.url+'message',data);
   }
