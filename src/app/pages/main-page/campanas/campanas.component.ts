@@ -79,6 +79,54 @@ export class CampanasComponent implements OnInit{
         async resp=>{
           if(resp.statusCode === 200) {
               this.dataSource = resp.campaigns??[]; 
+
+              const dataStatus = this.dataSource.filter(x=> x.process_status === 2);
+
+              dataStatus.filter(
+                x=> {
+                  // Combina fecha y hora en un solo string
+                  const fechaHoraString = `${x.process_date}T${x.process_hour}`;
+
+                  // Convierte la cadena en un objeto Date
+                  const fechaHora = new Date(fechaHoraString);
+
+                  // Obtén la fecha y hora actual
+                  const fechaHoraActual = new Date();
+
+                  // Compara las fechas
+                  if (fechaHora <= fechaHoraActual) {
+                      x.process_status = 3;      
+                      this.campanaService.updateCampana(x).subscribe(
+                        async resp=>{
+                          if(resp.statusCode===200){
+                            await this.filtrarCampana();
+                            await alerts.closeLoader();
+                            if(x.id){
+                              console.log(x.id);
+                              
+                              await this.mensajeService.updateStatus(x.id)
+                              .subscribe(
+                                resp=>{
+                                }
+                              );
+                            }
+                            setTimeout(async () => {
+                              await alerts.basicAlert('Ok', 'Se sincronizo los estados de los mensajes', 'success');
+                            }, 100);
+                          }else{
+                            await alerts.closeLoader();
+                          }
+                        },
+                        async err=>{
+                          await alerts.closeLoader();
+                          await alerts.basicAlert('Ok', 'Error al sincronizar los mensajes', 'error');
+
+                        }
+                      )
+                  } 
+                }
+              )
+
               this.localStorageService.agregar('campaigns',JSON.parse(JSON.stringify(resp.campaigns??[])));
               await alerts.closeLoader();  
           }else{

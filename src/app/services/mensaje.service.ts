@@ -25,4 +25,8 @@ export class MensajeService {
   create(data: iMensaje){
     return this.http.post<iResponse>(this.url+'message',data);
   }
+  
+  updateStatus(id: number){
+    return this.http.patch<iResponse>(this.url+'message/'+id+'/status',{});
+  }
 }
